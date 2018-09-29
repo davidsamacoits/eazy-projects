@@ -1,0 +1,29 @@
+{
+  "name": "eazy-projects",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "ios": "react-native run-ios --simulator \"iPhone X\""
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.1.2",
+    "react": "16.5.0",
+    "react-native": "0.57.1"
+  },
+  "devDependencies": {
+    "babel-jest": "23.6.0",
+    "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.47.0",
+    "react-test-renderer": "16.5.0",
+    "babel-eslint": "^8.2.2",
+    "babel-preset-react-native": "4.0.0",
+    "eslint": "^4.18.2",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
