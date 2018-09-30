@@ -10,40 +10,44 @@ import { STORAGE_KEYS } from './constants';
 
 import { imagesAssets } from './helpers/images';
 
-import ProjectCard from './components/ProjectCard';
+import { retrieveProjects, storeProjects } from './helpers/storage';
 
-// To remove
-const currentProjectId = 1;
+import { selectedProject } from './assets/projects';
+
+import ProjectCard from './components/ProjectCard';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {projects: {}};
+    this.state = {
+      projects: {},
+      isLoading: true,
+    };
   }
 
   componentDidMount() {
-    this._storeData(); 
-    this._retrieveData();
-    console.log('>>>>>>>> didMount');
+    retrieveProjects().then(projects => {
+      this.setState(previousState => {
+        return { projects, isLoading: false };
+      });
+    });
   }
 
   addMoneyCallback (amount) {
-    console.log('>>>>>>>> addMoneyCallback - amount', amount);
     const projects = this.state.projects;
-    const currentAmount = projects[currentProjectId].amountSaved;
-    const newAmount = +currentAmount + +amount;
-    projects[currentProjectId].amountSaved = newAmount;
-    this.setState(previousState => {
-      return { projects };
+    const currentAmount = projects[selectedProject].amountSaved;
+    projects[selectedProject].amountSaved = +currentAmount + +amount;
+    storeProjects(projects).then(() => {
+      this.setState(previousState => {
+        return { projects };
+      });
     });
-    this._storeProjects(projects);
-    console.log('>>>>>>>> newAmount', newAmount);
   }
 
-
   render() {
-    const currentProject = this.state.projects[currentProjectId];
-    if (currentProject) {
+    const currentProject = this.state.projects[selectedProject];
+    const isLoading = this.state.isLoading;
+    if (currentProject && !isLoading) {
       return (
         <ImageBackground
           source={imagesAssets[currentProject.imageSource]}
@@ -59,52 +63,11 @@ export default class App extends Component {
               projectName={currentProject.projectName}
               amountSaved={currentProject.amountSaved}
               imageSource={imagesAssets[currentProject.imageSource]}
-              submitCallback={(amount) => this.addMoneyCallback(amount)}
+              submitCallback={amount => this.addMoneyCallback(amount)}
             />
           </View>
         </ImageBackground>
       );
     } else { return null; }
   }
-
-  _storeData = async () => {
-    try {
-      const projects = {
-        1: {
-          projectName: "Europe MMXIX",
-          amountSaved: "250.00",
-          imageSource: "602493b9e8f24516aab8c2455fddc44b",
-        },
-      };
-      await AsyncStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(projects));
-    } catch (error) {
-      // Error saving data
-    }
-  }
-
-  _storeProjects = async (projects) => {
-    try {
-      await AsyncStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(projects));
-    } catch (error) {
-      // Error saving data
-    }
-  }
-
-  _retrieveData = async () => {
-    try {
-      const value = await AsyncStorage.getItem(STORAGE_KEYS.PROJECTS);
-      if (value !== null) {
-        // We have data!!
-        const projects = JSON.parse(value);
-        this.setState(previousState => {
-          return { projects };
-        });
-        console.log(projects);
-      }
-     } catch (error) {
-       // Error retrieving data
-       console.log(error);
-     }
-  }
-
 }
