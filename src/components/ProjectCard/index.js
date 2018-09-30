@@ -6,15 +6,30 @@ import {
   View,
   ImageBackground,
   TouchableOpacity,
+  AsyncStorage,
 } from 'react-native';
 import styles from './styles';
 
 import { COLOR_PRIMARY } from '../../styles/common';
 
+import { CURRENCIES } from '../../constants';
+
 const ProjectCard = props => {
   const {
     imageSource,
+    projectName,
+    amountSaved,
+    submitCallback,
   } = props;
+
+  // Formating for CAD currency
+  const numberFormat = new Intl.NumberFormat(CURRENCIES.CAD.locale, {
+    style: 'currency',
+    currency: CURRENCIES.CAD.code,
+    maximumFractionDigits: 2,
+  });
+  const amount = numberFormat.format(amountSaved);
+
   return ( 
   <View style={styles.projectCardContainer}>
     <ImageBackground
@@ -27,13 +42,24 @@ const ProjectCard = props => {
         style={styles.imageCardOverlay}
         resizeMode="stretch"
       >
-        <Text style={styles.text}>
-          Hello
+        <Text
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          style={styles.projectName}
+        >
+          {projectName}
+        </Text>
+        <Text
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          style={styles.amountSaved}
+        >
+          {amount}
         </Text>
       </ImageBackground>
     </ImageBackground>
     <TouchableOpacity
-      onPress={()=>{}}
+      onPress={() => submitCallback(100)}
       color={COLOR_PRIMARY}
       style={styles.addMoneyButton}
     >
