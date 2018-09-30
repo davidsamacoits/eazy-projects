@@ -15,12 +15,15 @@ export default class App extends Component {
         source={require('./assets/images/535818.jpg')}
         blurRadius={BLUR_RADIUS_OVERLAY}
         style={styles.container}
+        resizeMode="cover"
       >
         <StatusBar
           barStyle="light-content"
         />
         <View style={styles.containerOverlay}>
-          <ProjectCard />
+          <ProjectCard
+            imageSource={require('./assets/images/535818.jpg')}
+          />
         </View>
       </ImageBackground>
     );

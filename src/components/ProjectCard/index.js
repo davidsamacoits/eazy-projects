@@ -11,16 +11,26 @@ import styles from './styles';
 
 import { COLOR_PRIMARY } from '../../styles/common';
 
-const ProjectCard = () => (
+const ProjectCard = props => {
+  const {
+    imageSource,
+  } = props;
+  return ( 
   <View style={styles.projectCardContainer}>
     <ImageBackground
-      source={require('../../assets/images/535818.jpg')}
+      source={imageSource}
       style={styles.imageCardContainer}
       resizeMode="cover"
     >
-      <Text>
-        Hello
-      </Text>
+      <ImageBackground
+        source={require('../../assets/images/gradient.png')}
+        style={styles.imageCardOverlay}
+        resizeMode="stretch"
+      >
+        <Text style={styles.text}>
+          Hello
+        </Text>
+      </ImageBackground>
     </ImageBackground>
     <TouchableOpacity
       onPress={()=>{}}
@@ -30,6 +40,7 @@ const ProjectCard = () => (
       <Text>Add money to this project</Text>
     </TouchableOpacity>
   </View>
-);
+  );
+};
 
 export default ProjectCard;

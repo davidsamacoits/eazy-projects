@@ -32,12 +32,18 @@ export default StyleSheet.create({
   imageCardContainer: {
     height: (height-CARD_HEIGHT_GUTTER),
     width: (width-CARD_WIDTH_GUTTER),
+  },
+  imageCardOverlay: {
+    flex: 1,
     justifyContent: 'flex-end',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
   addMoneyButton: {
     padding: 15,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  text: {
+    color: "red",
   }
 });
