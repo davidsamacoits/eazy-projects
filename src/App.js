@@ -3,18 +3,17 @@
 import React, { Component } from 'react';
 import { Text, View, ImageBackground, StatusBar, AsyncStorage } from 'react-native';
 
+import ProjectCard from './components/ProjectCard';
+
 import styles from './styles/app';
 import { BLUR_RADIUS_OVERLAY } from './styles/common';
 
 import { STORAGE_KEYS } from './constants';
 
 import { imagesAssets } from './helpers/images';
-
 import { retrieveProjects, storeProjects } from './helpers/storage';
 
 import { selectedProject } from './assets/projects';
-
-import ProjectCard from './components/ProjectCard';
 
 export default class App extends Component {
   constructor(props) {
