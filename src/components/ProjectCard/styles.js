@@ -9,6 +9,11 @@ import {
   SHADOW_RADIUS,
   SHADOW_OPACITY,
   COLOR_WHITE,
+  TEXT_SHADOW_COLOR,
+  TEXT_SHADOW_HEIGHT,
+  TEXT_SHADOW_WIDTH,
+  TEXT_SHADOW_RADIUS,
+  TEXT_SHADOW_OPACITY,
 } from '../../styles/common';
 
 import { 
@@ -43,7 +48,24 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {
-    color: "red",
+  projectName: {
+    color: COLOR_WHITE,
+    fontWeight: "700",
+    fontSize: 20,
+    padding: 20,
+    paddingBottom: 0,
+    textShadowColor: TEXT_SHADOW_COLOR,
+    textShadowRadius: TEXT_SHADOW_RADIUS,
+    textShadowOffset: {width: TEXT_SHADOW_WIDTH, height: TEXT_SHADOW_HEIGHT},
+  },
+  amountSaved: {
+    color: COLOR_WHITE,
+    fontWeight: "200",
+    fontSize: 45,
+    padding: 20,
+    paddingTop: 0,
+    textShadowColor: TEXT_SHADOW_COLOR,
+    textShadowRadius: TEXT_SHADOW_RADIUS,
+    textShadowOffset: {width: TEXT_SHADOW_WIDTH, height: TEXT_SHADOW_HEIGHT},
   }
 });
