@@ -58,13 +58,15 @@ const ProjectCard = props => {
         </Text>
       </ImageBackground>
     </ImageBackground>
-    <TouchableOpacity
-      onPress={() => submitCallback(100)}
-      color={COLOR_PRIMARY}
-      style={styles.addMoneyButton}
-    >
-      <Text>Add money to this project</Text>
-    </TouchableOpacity>
+    <View style={styles.buttonsContainer}>
+      <TouchableOpacity
+        onPress={() => submitCallback(100)}
+        color={COLOR_PRIMARY}
+        style={styles.addMoneyButton}
+      >
+        <Text>Add money to this project</Text>
+      </TouchableOpacity>
+    </View>
   </View>
   );
 };

@@ -43,6 +43,9 @@ export default StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
   },
+  buttonsContainer: {
+    
+  },
   addMoneyButton: {
     padding: 15,
     justifyContent: 'center',

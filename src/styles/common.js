@@ -11,7 +11,7 @@ export const BLUR_RADIUS_OVERLAY = 20;
 
 // SHADOW
 export const SHADOW_COLOR = 'rgb(0, 0, 0)';
-export const SHADOW_OPACITY = 0.75;
+export const SHADOW_OPACITY = 0.85;
 export const SHADOW_HEIGHT= 10;
 export const SHADOW_WIDTH = 0;
 export const SHADOW_RADIUS = 10;
