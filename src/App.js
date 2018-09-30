@@ -1,7 +1,7 @@
 // ./App.js
 
-import React, {Component} from 'react';
-import {Text, View, ImageBackground} from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, ImageBackground, StatusBar } from 'react-native';
 
 import styles from './styles/app';
 import { BLUR_RADIUS_OVERLAY } from './styles/common';
@@ -16,6 +16,9 @@ export default class App extends Component {
         blurRadius={BLUR_RADIUS_OVERLAY}
         style={styles.container}
       >
+        <StatusBar
+          barStyle="light-content"
+        />
         <View style={styles.containerOverlay}>
           <ProjectCard />
         </View>
