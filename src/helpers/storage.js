@@ -9,6 +9,7 @@ export const storeProjects = async (projectsToSave) => {
     await AsyncStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(projectsToSave));
   } catch (error) {
     // Error saving data
+    console.log(error);
   }
 }
 
