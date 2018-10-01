@@ -9,6 +9,8 @@ import {
   SHADOW_RADIUS,
   SHADOW_OPACITY,
   COLOR_WHITE,
+  COLOR_GREEN,
+  COLOR_RED,
   TEXT_SHADOW_COLOR,
   TEXT_SHADOW_HEIGHT,
   TEXT_SHADOW_WIDTH,
@@ -44,12 +46,38 @@ export default StyleSheet.create({
     alignItems: 'flex-start',
   },
   buttonsContainer: {
-    
+    flexDirection: 'row',
   },
-  addMoneyButton: {
+  openAddMoneyButton: {
     padding: 15,
     justifyContent: 'center',
     alignItems: 'center',
+    flex: 1,
+  },
+  openAddMoneyText: {
+    fontWeight: '400',
+  },
+  cancelButton: {
+    backgroundColor: COLOR_RED,
+    padding: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+  },
+  cancelText: {
+    color: COLOR_WHITE,
+    fontWeight: '500',
+  },
+  addMoneyButton: {
+    backgroundColor: COLOR_GREEN,
+    padding: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+  },
+  addText: {
+    color: COLOR_WHITE,
+    fontWeight: '500',
   },
   projectName: {
     color: COLOR_WHITE,
