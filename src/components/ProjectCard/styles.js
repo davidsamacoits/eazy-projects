@@ -81,7 +81,7 @@ export default StyleSheet.create({
   },
   projectName: {
     color: COLOR_WHITE,
-    fontWeight: "700",
+    fontWeight: '700',
     fontSize: 20,
     padding: 20,
     paddingBottom: 0,
@@ -91,12 +91,22 @@ export default StyleSheet.create({
   },
   amountSaved: {
     color: COLOR_WHITE,
-    fontWeight: "200",
+    fontWeight: '200',
     fontSize: 45,
     padding: 20,
     paddingTop: 0,
     textShadowColor: TEXT_SHADOW_COLOR,
     textShadowRadius: TEXT_SHADOW_RADIUS,
     textShadowOffset: {width: TEXT_SHADOW_WIDTH, height: TEXT_SHADOW_HEIGHT},
+  },
+  amountInputContainer: {
+    height: 0,
+    justifyContent: 'center',
+    opacity: 0,
+  },
+  amountInput: {
+    padding: 15,
+    fontSize: 25,
+    fontWeight: '300',
   }
 });

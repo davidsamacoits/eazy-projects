@@ -1,7 +1,14 @@
 // ./App.js
 
 import React, { Component } from 'react';
-import { Text, View, ImageBackground, StatusBar, AsyncStorage } from 'react-native';
+import { 
+  Text,
+  View,
+  ImageBackground,
+  StatusBar,
+  AsyncStorage,
+  KeyboardAvoidingView,
+} from 'react-native';
 
 import ProjectCard from './components/ProjectCard';
 
@@ -54,17 +61,17 @@ export default class App extends Component {
           style={styles.container}
           resizeMode="cover"
         >
-          <StatusBar
-            barStyle="light-content"
-          />
-          <View style={styles.containerOverlay}>
-            <ProjectCard
-              projectName={currentProject.projectName}
-              amountSaved={currentProject.amountSaved}
-              imageSource={imagesAssets[currentProject.imageSource]}
-              submitCallback={amount => this.addMoneyCallback(amount)}
+            <StatusBar
+              barStyle="light-content"
             />
-          </View>
+            <KeyboardAvoidingView style={styles.containerOverlay} behavior="position">
+              <ProjectCard
+                projectName={currentProject.projectName}
+                amountSaved={currentProject.amountSaved}
+                imageSource={imagesAssets[currentProject.imageSource]}
+                submitCallback={amount => this.addMoneyCallback(amount)}
+              />
+            </KeyboardAvoidingView>
         </ImageBackground>
       );
     } else { return null; }
