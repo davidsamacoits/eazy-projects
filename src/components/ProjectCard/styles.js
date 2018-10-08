@@ -48,7 +48,7 @@ export default StyleSheet.create({
     alignItems: 'flex-start',
   },
   progressContainer: {
-    height: 6,
+    height: CARD_PROGRESS_HEIGHT,
   },
   progressBar: {
     height: CARD_PROGRESS_HEIGHT,

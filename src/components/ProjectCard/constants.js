@@ -10,3 +10,9 @@ export const CARD_INPUT_DELAY = 125;
 
 export const CARD_PROGRESS_HEIGHT = 5;
 export const CARD_PROGRESS_COLOR = 'rgb(231, 76, 60)';
+
+export const CARD_AMOUNT_OPTIONS = {
+  precision: 0,
+  unit:'$',
+  delimiter: ',',
+};

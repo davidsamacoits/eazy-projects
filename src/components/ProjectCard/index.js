@@ -24,19 +24,39 @@ import {
   CARD_INPUT_DURATION,
   CARD_INPUT_OPACITY,
   CARD_INPUT_DELAY,
-  CARD_WIDTH_GUTTER
+  CARD_WIDTH_GUTTER,
+  CARD_AMOUNT_OPTIONS,
 } from './constants';
 
 export default class ProjectCard extends Component {
   constructor(props) {
     super(props);
+    // Calculate progress
+    const progressWidth = this.calculateProgressWidth(this.props.goal, this.props.amountSaved);
     this.state = {
       isEditing: false,
       amountToAdd: '0',
       animatedHeight: new Animated.Value(0),
       animatedOpacity: new Animated.Value(0),
-      animatedProgress: new Animated.Value(0),
+      animatedProgress: new Animated.Value(progressWidth),
     };
+  }
+
+  calculateProgressWidth(goal, amountSaved) {
+    const { width } = Dimensions.get('window');
+    const fullWidth = width - CARD_WIDTH_GUTTER;
+    const realPourcentage = (+amountSaved / +goal);
+    let pourcentage = realPourcentage;
+    if (pourcentage > 1) pourcentage = 1;
+    return pourcentage * fullWidth;
+  }
+
+  animateProgressBar(amountToAdd) {
+    const progressWidth = this.calculateProgressWidth(this.props.goal, (+this.props.amountSaved + +amountToAdd));
+    Animated.timing(
+      this.state.animatedProgress,
+      { toValue: progressWidth, duration: CARD_INPUT_DURATION }
+    ).start();
   }
 
   animateInput() {
@@ -62,17 +82,6 @@ export default class ProjectCard extends Component {
     Animated.timing(
         this.state.animatedOpacity,
         { toValue: values.opacity.toValue, duration: CARD_INPUT_DURATION, delay: values.opacity.delay }
-    ).start();
-    // Animate progress bar
-    const { width } = Dimensions.get('window');
-    const goal = this.props.goal;
-    const amountSaved = this.props.amountSaved;
-    const fullWidth = width - CARD_WIDTH_GUTTER;
-    const pourcentageAccomplished = +amountSaved / +goal;
-    const newProgress = pourcentageAccomplished * fullWidth;
-    Animated.timing(
-      this.state.animatedProgress,
-      { toValue: newProgress, duration: CARD_INPUT_DURATION }
     ).start();
   }
 
@@ -119,6 +128,7 @@ export default class ProjectCard extends Component {
           <TouchableOpacity
             onPress={() => {
               submitCallback(this.state.amountToAdd);
+              this.animateProgressBar(this.state.amountToAdd);
               this.hideEditing();
             }}
             color={COLOR_PRIMARY}
@@ -162,12 +172,9 @@ export default class ProjectCard extends Component {
             type={'money'}
             style={styles.amountSaved}
             value={amountSaved}
+            ref={ref => (this.amountSaved = ref)}
+            options={CARD_AMOUNT_OPTIONS}
             editable={false}
-            options={{
-              precision: 0,
-              unit:'$',
-              delimiter: ',',
-            }}
           />
         </ImageBackground>
       </ImageBackground>
@@ -180,17 +187,13 @@ export default class ProjectCard extends Component {
             style={styles.amountInput}
             value={this.state.amountToAdd}
             ref={ref => (this.amountInput = ref)}
+            options={CARD_AMOUNT_OPTIONS}
             onChangeText={() => {
                 this.setState({
                   amountToAdd: this.amountInput.getRawValue(),
                 })
               }
             }
-            options={{
-              precision: 0,
-              unit:'$',
-              delimiter: ',',
-            }}
         />
       </Animated.View>
       {this.state.isEditing && this.renderEditingButton(submitCallback)}
