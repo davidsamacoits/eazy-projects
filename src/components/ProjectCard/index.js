@@ -19,7 +19,6 @@ import styles from './styles';
 
 import { COLOR_PRIMARY, TEXT_SHADOW_WIDTH } from '../../styles/common';
 
-import { CURRENCIES } from '../../constants';
 import { 
   CARD_INPUT_HEIGHT,
   CARD_INPUT_DURATION,
@@ -139,14 +138,7 @@ export default class ProjectCard extends Component {
       amountSaved,
       submitCallback,
     } = this.props;
-  
-    // Formating for CAD currency
-    const numberFormat = new Intl.NumberFormat(CURRENCIES.CAD.locale, {
-      style: 'currency',
-      currency: CURRENCIES.CAD.code,
-    });
-    const amount = numberFormat.format(amountSaved);
-  
+
     return ( 
     <View style={styles.projectCardContainer}>
       <ImageBackground
@@ -166,13 +158,17 @@ export default class ProjectCard extends Component {
           >
             {projectName}
           </Text>
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
+          <TextInputMask
+            type={'money'}
             style={styles.amountSaved}
-          >
-            {amount}
-          </Text>
+            value={amountSaved}
+            editable={false}
+            options={{
+              precision: 0,
+              unit:'$',
+              delimiter: ',',
+            }}
+          />
         </ImageBackground>
       </ImageBackground>
       <View style={styles.progressContainer}>
@@ -183,10 +179,10 @@ export default class ProjectCard extends Component {
             type={'money'}
             style={styles.amountInput}
             value={this.state.amountToAdd}
-            onChangeText={(text) => {
-                const textToSave = text.match(/(([0-9]+\,)+)?[0-9]+/g);
+            ref={ref => (this.amountInput = ref)}
+            onChangeText={() => {
                 this.setState({
-                  amountToAdd: textToSave[0].replace(/,/g, ''),
+                  amountToAdd: this.amountInput.getRawValue(),
                 })
               }
             }
