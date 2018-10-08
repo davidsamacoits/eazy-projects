@@ -21,7 +21,9 @@ import {
 import { 
   CARD_RADIUS,
   CARD_HEIGHT_GUTTER,
-  CARD_WIDTH_GUTTER
+  CARD_WIDTH_GUTTER,
+  CARD_PROGRESS_HEIGHT,
+  CARD_PROGRESS_COLOR,
 } from './constants';
 
 const { height, width } = Dimensions.get('window');
@@ -45,11 +47,23 @@ export default StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
   },
+  progressContainer: {
+    height: 6,
+  },
+  progressBar: {
+    height: CARD_PROGRESS_HEIGHT,
+    backgroundColor: CARD_PROGRESS_COLOR,
+    borderBottomLeftRadius: 0,
+		borderBottomRightRadius: CARD_PROGRESS_HEIGHT,
+		borderTopLeftRadius: 0,
+    borderTopRightRadius: CARD_PROGRESS_HEIGHT,
+  },
   buttonsContainer: {
     flexDirection: 'row',
   },
   openAddMoneyButton: {
     padding: 15,
+    paddingTop: 15 - CARD_PROGRESS_HEIGHT,
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
@@ -106,6 +120,7 @@ export default StyleSheet.create({
   },
   amountInput: {
     padding: 15,
+    paddingTop: 15 - CARD_PROGRESS_HEIGHT,
     fontSize: 25,
     fontWeight: '300',
   }

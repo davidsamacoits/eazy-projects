@@ -13,13 +13,20 @@ import {
   TextInput,
   Animated,
   Keyboard,
+  Dimensions,
 } from 'react-native';
 import styles from './styles';
 
 import { COLOR_PRIMARY, TEXT_SHADOW_WIDTH } from '../../styles/common';
 
 import { CURRENCIES } from '../../constants';
-import { CARD_INPUT_HEIGHT, CARD_INPUT_DURATION, CARD_INPUT_OPACITY, CARD_INPUT_DELAY } from './constants';
+import { 
+  CARD_INPUT_HEIGHT,
+  CARD_INPUT_DURATION,
+  CARD_INPUT_OPACITY,
+  CARD_INPUT_DELAY,
+  CARD_WIDTH_GUTTER
+} from './constants';
 
 export default class ProjectCard extends Component {
   constructor(props) {
@@ -27,8 +34,9 @@ export default class ProjectCard extends Component {
     this.state = {
       isEditing: false,
       amountToAdd: '0',
-      animatedHeight : new Animated.Value(0),
-      animatedOpacity : new Animated.Value(0),
+      animatedHeight: new Animated.Value(0),
+      animatedOpacity: new Animated.Value(0),
+      animatedProgress: new Animated.Value(0),
     };
   }
 
@@ -47,6 +55,7 @@ export default class ProjectCard extends Component {
     };
     this.state.animatedHeight.setValue(values.height.initial);
     this.state.animatedOpacity.setValue(values.opacity.initial);
+    // Animate input height and opacity
     Animated.timing(
         this.state.animatedHeight,
         { toValue: values.height.toValue, duration: CARD_INPUT_DURATION, delay: values.height.delay }
@@ -54,6 +63,17 @@ export default class ProjectCard extends Component {
     Animated.timing(
         this.state.animatedOpacity,
         { toValue: values.opacity.toValue, duration: CARD_INPUT_DURATION, delay: values.opacity.delay }
+    ).start();
+    // Animate progress bar
+    const { width } = Dimensions.get('window');
+    const goal = this.props.goal;
+    const amountSaved = this.props.amountSaved;
+    const fullWidth = width - CARD_WIDTH_GUTTER;
+    const pourcentageAccomplished = +amountSaved / +goal;
+    const newProgress = pourcentageAccomplished * fullWidth;
+    Animated.timing(
+      this.state.animatedProgress,
+      { toValue: newProgress, duration: CARD_INPUT_DURATION }
     ).start();
   }
 
@@ -124,7 +144,6 @@ export default class ProjectCard extends Component {
     const numberFormat = new Intl.NumberFormat(CURRENCIES.CAD.locale, {
       style: 'currency',
       currency: CURRENCIES.CAD.code,
-      maximumFractionDigits: 2,
     });
     const amount = numberFormat.format(amountSaved);
   
@@ -156,19 +175,23 @@ export default class ProjectCard extends Component {
           </Text>
         </ImageBackground>
       </ImageBackground>
+      <View style={styles.progressContainer}>
+        <Animated.View style={[styles.progressBar, { width: this.state.animatedProgress }]}></Animated.View>
+      </View>
       <Animated.View style={[styles.amountInputContainer, { height: this.state.animatedHeight, opacity: this.state.animatedOpacity }]}>
         <TextInputMask
             type={'money'}
             style={styles.amountInput}
             value={this.state.amountToAdd}
             onChangeText={(text) => {
+                const textToSave = text.match(/(([0-9]+\,)+)?[0-9]+/g);
                 this.setState({
-                  amountToAdd: text.match(/(([0-9]+\,)+)?[0-9]+\.[0-9]+/g),
+                  amountToAdd: textToSave[0].replace(/,/g, ''),
                 })
               }
             }
             options={{
-              separator:'.',
+              precision: 0,
               unit:'$',
               delimiter: ',',
             }}

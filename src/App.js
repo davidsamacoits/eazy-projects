@@ -32,7 +32,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    retrieveProjects().then(projects => {
+    retrieveProjects(true).then(projects => {
       this.setState(previousState => {
         return { projects, isLoading: false };
       });
@@ -42,7 +42,8 @@ export default class App extends Component {
   addMoneyCallback (amount) {
     const projects = this.state.projects;
     const currentAmount = projects[selectedProject].amountSaved;
-    projects[selectedProject].amountSaved = +currentAmount + +amount;
+    const newAmountSaved = +currentAmount + +amount
+    projects[selectedProject].amountSaved = newAmountSaved;
     storeProjects(projects).then(() => {
       this.setState(previousState => {
         return { projects };
@@ -68,6 +69,7 @@ export default class App extends Component {
               <ProjectCard
                 projectName={currentProject.projectName}
                 amountSaved={currentProject.amountSaved}
+                goal={currentProject.goal}
                 imageSource={imagesAssets[currentProject.imageSource]}
                 submitCallback={amount => this.addMoneyCallback(amount)}
               />
