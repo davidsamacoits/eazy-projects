@@ -31,10 +31,10 @@ import {
 export default class ProjectCard extends Component {
   constructor(props) {
     super(props);
-    // Calculate progress
+    // Calculate initial progress
     const progressWidth = this.calculateProgressWidth(this.props.goal, this.props.amountSaved);
     this.state = {
-      isEditing: false,
+      isAdding: false,
       amountToAdd: '0',
       animatedHeight: new Animated.Value(0),
       animatedOpacity: new Animated.Value(0),
@@ -62,14 +62,14 @@ export default class ProjectCard extends Component {
   animateInput() {
     const values = {
       height: {
-        initial: this.state.isEditing ? CARD_INPUT_HEIGHT : 0,
-        toValue: this.state.isEditing ? 0 : CARD_INPUT_HEIGHT,
-        delay: this.state.isEditing ? CARD_INPUT_DELAY/2 : 0,
+        initial: this.state.isAdding ? CARD_INPUT_HEIGHT : 0,
+        toValue: this.state.isAdding ? 0 : CARD_INPUT_HEIGHT,
+        delay: this.state.isAdding ? CARD_INPUT_DELAY/2 : 0,
       },
       opacity: {
-        initial: this.state.isEditing ? CARD_INPUT_OPACITY : 0,
-        toValue: this.state.isEditing ? 0 : CARD_INPUT_OPACITY,
-        delay: this.state.isEditing ? 0 : CARD_INPUT_DELAY,
+        initial: this.state.isAdding ? CARD_INPUT_OPACITY : 0,
+        toValue: this.state.isAdding ? 0 : CARD_INPUT_OPACITY,
+        delay: this.state.isAdding ? 0 : CARD_INPUT_DELAY,
       },
     };
     this.state.animatedHeight.setValue(values.height.initial);
@@ -87,14 +87,14 @@ export default class ProjectCard extends Component {
 
   showEditing() {
     this.setState(previousState => {
-      return { isEditing: true };
+      return { isAdding: true };
     });
     this.animateInput();
   }
 
   hideEditing() {
     this.setState(previousState => {
-      return { isEditing: false, amountToAdd: '0' };
+      return { isAdding: false, amountToAdd: '0' };
     });
     this.animateInput();
     Keyboard.dismiss();
@@ -147,6 +147,7 @@ export default class ProjectCard extends Component {
       projectName,
       amountSaved,
       submitCallback,
+      goal,
     } = this.props;
 
     return ( 
@@ -176,6 +177,17 @@ export default class ProjectCard extends Component {
             options={CARD_AMOUNT_OPTIONS}
             editable={false}
           />
+          <View style={styles.amountGoalContainer}>
+            <Text>>></Text>
+            <TextInputMask
+              type={'money'}
+              style={styles.amountGoal}
+              value={goal}
+              ref={ref => (this.amountGoal = ref)}
+              options={CARD_AMOUNT_OPTIONS}
+              editable={false}
+            />
+          </View>
         </ImageBackground>
       </ImageBackground>
       <View style={styles.progressContainer}>
@@ -196,8 +208,8 @@ export default class ProjectCard extends Component {
             }
         />
       </Animated.View>
-      {this.state.isEditing && this.renderEditingButton(submitCallback)}
-      {!this.state.isEditing && this.renderAddMoneyButton()}
+      {this.state.isAdding && this.renderEditingButton(submitCallback)}
+      {!this.state.isAdding && this.renderAddMoneyButton()}
     </View>
     );
   }
