@@ -122,7 +122,7 @@ export default StyleSheet.create({
   amountGoal: {
     color: COLOR_WHITE,
     fontWeight: '500',
-    fontSize: 18,
+    fontSize: 16,
     textShadowColor: TEXT_SHADOW_COLOR,
     textShadowRadius: TEXT_SHADOW_RADIUS,
     textShadowOffset: {width: TEXT_SHADOW_WIDTH, height: TEXT_SHADOW_HEIGHT},
