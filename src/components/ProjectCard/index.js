@@ -1,7 +1,7 @@
 // ./components/ProjectCard/index.js
 
 import React, { Component } from 'react';
-
+import Icon from 'react-native-vector-icons/Ionicons';
 import { TextInputMask } from 'react-native-masked-text'
 
 import {
@@ -35,6 +35,7 @@ export default class ProjectCard extends Component {
     const progressWidth = this.calculateProgressWidth(this.props.goal, this.props.amountSaved);
     this.state = {
       isAdding: false,
+      isEditing: true,
       amountToAdd: '0',
       animatedHeight: new Animated.Value(0),
       animatedOpacity: new Animated.Value(0),
@@ -162,31 +163,46 @@ export default class ProjectCard extends Component {
           style={styles.imageCardOverlay}
           resizeMode="stretch"
         >
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            style={styles.projectName}
-          >
-            {projectName}
-          </Text>
-          <TextInputMask
-            type={'money'}
-            style={styles.amountSaved}
-            value={amountSaved}
-            ref={ref => (this.amountSaved = ref)}
-            options={CARD_AMOUNT_OPTIONS}
-            editable={false}
-          />
-          <View style={styles.amountGoalContainer}>
-            <Text>>></Text>
+          <View style={styles.editContainer}>
+            <TouchableOpacity>
+              <Icon
+                name='ios-create'
+                size={25}
+                style={styles.iconGoal}
+              />
+            </TouchableOpacity>
+          </View>
+          <View>
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={styles.projectName}
+            >
+              {projectName}
+            </Text>
             <TextInputMask
               type={'money'}
-              style={styles.amountGoal}
-              value={goal}
-              ref={ref => (this.amountGoal = ref)}
+              style={styles.amountSaved}
+              value={amountSaved}
+              ref={ref => (this.amountSaved = ref)}
               options={CARD_AMOUNT_OPTIONS}
-              editable={false}
+              editable={this.state.isEditing}
             />
+            <View style={styles.amountGoalContainer}>
+              <Icon
+                name='ios-return-right'
+                size={25}
+                style={styles.iconGoal}
+              />
+              <TextInputMask
+                type={'money'}
+                style={styles.amountGoal}
+                value={goal}
+                ref={ref => (this.amountGoal = ref)}
+                options={CARD_AMOUNT_OPTIONS}
+                editable={this.state.isEditing}
+              />
+            </View>
           </View>
         </ImageBackground>
       </ImageBackground>

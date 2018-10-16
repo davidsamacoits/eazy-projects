@@ -9,7 +9,7 @@ export const COLOR_GREEN = 'rgba(120, 224, 143,1.0)';
 export const COLOR_RED = 'rgba(229, 80, 57,1.0)';
 
 // BLUR
-export const BLUR_RADIUS_OVERLAY = 100;
+export const BLUR_RADIUS_OVERLAY = 30;
 
 // SHADOW
 export const SHADOW_COLOR = 'rgb(0, 0, 0)';

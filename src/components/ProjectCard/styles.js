@@ -44,8 +44,11 @@ export default StyleSheet.create({
   },
   imageCardOverlay: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     alignItems: 'flex-start',
+  },
+  editContainer: {
+    alignItems: 'flex-end',
   },
   progressContainer: {
     height: CARD_PROGRESS_HEIGHT,
@@ -96,7 +99,7 @@ export default StyleSheet.create({
   projectName: {
     color: COLOR_WHITE,
     fontWeight: '700',
-    fontSize: 20,
+    fontSize: 22,
     padding: 20,
     paddingBottom: 0,
     textShadowColor: TEXT_SHADOW_COLOR,
@@ -109,7 +112,7 @@ export default StyleSheet.create({
     fontSize: 45,
     padding: 20,
     paddingBottom: 0,
-    paddingTop: 0,
+    paddingTop: 1,
     textShadowColor: TEXT_SHADOW_COLOR,
     textShadowRadius: TEXT_SHADOW_RADIUS,
     textShadowOffset: {width: TEXT_SHADOW_WIDTH, height: TEXT_SHADOW_HEIGHT},
@@ -119,9 +122,17 @@ export default StyleSheet.create({
     padding: 20,
     paddingTop: 0,
   },
+  iconGoal: {
+    color: COLOR_WHITE,
+    marginLeft: 12,
+    textShadowColor: TEXT_SHADOW_COLOR,
+    textShadowRadius: TEXT_SHADOW_RADIUS,
+    textShadowOffset: {width: TEXT_SHADOW_WIDTH, height: TEXT_SHADOW_HEIGHT},
+  },
   amountGoal: {
     color: COLOR_WHITE,
     fontWeight: '500',
+    marginLeft: 5,
     fontSize: 16,
     textShadowColor: TEXT_SHADOW_COLOR,
     textShadowRadius: TEXT_SHADOW_RADIUS,
