@@ -17,7 +17,12 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import ProjectCard from './components/ProjectCard';
 
 import styles from './styles/app';
-import { BLUR_RADIUS_OVERLAY, ACTIVE_OPACITY } from './styles/common';
+import {
+  BLUR_RADIUS_OVERLAY,
+  ACTIVE_OPACITY,
+  CAROUSSEL_INACTIVE_SLIDE_OPACITY,
+  CAROUSSEL_INACTIVE_SLIDE_SCALE
+} from './styles/common';
 
 import { STORAGE_KEYS } from './constants';
 import { CARD_WIDTH_GUTTER } from './components/ProjectCard/constants'; 
@@ -132,6 +137,8 @@ export default class App extends Component {
                 itemWidth={width - CARD_WIDTH_GUTTER}
                 containerCustomStyle={{ flexGrow: 0, overflow:'visible'}}
                 onBeforeSnapToItem={this._onBeforeSnapToItem.bind(this)}
+                inactiveSlideOpacity={CAROUSSEL_INACTIVE_SLIDE_OPACITY}
+                inactiveSlideScale={CAROUSSEL_INACTIVE_SLIDE_SCALE}
               />
               {this._renderPagination()}
             </KeyboardAvoidingView>
