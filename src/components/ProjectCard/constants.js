@@ -8,7 +8,7 @@ export const CARD_INPUT_OPACITY = 1;
 export const CARD_INPUT_DURATION = 200;
 export const CARD_INPUT_DELAY = 100;
 
-export const CARD_PROGRESS_HEIGHT = 6;
+export const CARD_PROGRESS_HEIGHT = 8;
 export const CARD_PROGRESS_COLOR = 'rgb(231, 76, 60)';
 
 export const CARD_AMOUNT_OPTIONS = {

@@ -35,7 +35,7 @@ export default class ProjectCard extends Component {
     const progressWidth = this.calculateProgressWidth(this.props.goal, this.props.amountSaved);
     this.state = {
       isAdding: false,
-      isEditing: true,
+      isEditing: false,
       amountToAdd: '0',
       animatedHeight: new Animated.Value(0),
       animatedOpacity: new Animated.Value(0),
@@ -163,53 +163,42 @@ export default class ProjectCard extends Component {
           style={styles.imageCardOverlay}
           resizeMode="stretch"
         >
-          <View style={styles.editContainer}>
-            <TouchableOpacity>
-              <Icon
-                name='ios-create'
-                size={25}
-                style={styles.iconGoal}
-              />
-            </TouchableOpacity>
-          </View>
-          <View>
-            <Text
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              style={styles.projectName}
-            >
-              {projectName}
-            </Text>
+          <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={styles.projectName}
+          >
+            {projectName}
+          </Text>
+          <TextInputMask
+            type={'money'}
+            style={styles.amountSaved}
+            value={amountSaved}
+            ref={ref => (this.amountSaved = ref)}
+            options={CARD_AMOUNT_OPTIONS}
+            editable={this.state.isEditing}
+          />
+          <View style={styles.amountGoalContainer}>
+            <Icon
+              name='ios-return-right'
+              size={25}
+              style={styles.iconGoal}
+            />
             <TextInputMask
               type={'money'}
-              style={styles.amountSaved}
-              value={amountSaved}
-              ref={ref => (this.amountSaved = ref)}
+              style={styles.amountGoal}
+              value={goal}
+              ref={ref => (this.amountGoal = ref)}
               options={CARD_AMOUNT_OPTIONS}
               editable={this.state.isEditing}
             />
-            <View style={styles.amountGoalContainer}>
-              <Icon
-                name='ios-return-right'
-                size={25}
-                style={styles.iconGoal}
-              />
-              <TextInputMask
-                type={'money'}
-                style={styles.amountGoal}
-                value={goal}
-                ref={ref => (this.amountGoal = ref)}
-                options={CARD_AMOUNT_OPTIONS}
-                editable={this.state.isEditing}
-              />
-            </View>
+          </View>
+          <View style={styles.progressContainer}>
+            <Animated.View style={[styles.progressBar, { width: this.state.animatedProgress }]}></Animated.View>
           </View>
         </ImageBackground>
       </ImageBackground>
-      <View style={styles.progressContainer}>
-        <Animated.View style={[styles.progressBar, { width: this.state.animatedProgress }]}></Animated.View>
-      </View>
-      <Animated.View style={[styles.amountInputContainer, { height: this.state.animatedHeight, opacity: this.state.animatedOpacity }]}>
+      {/* <Animated.View style={[styles.amountInputContainer, { height: this.state.animatedHeight, opacity: this.state.animatedOpacity }]}>
         <TextInputMask
             type={'money'}
             style={styles.amountInput}
@@ -223,7 +212,7 @@ export default class ProjectCard extends Component {
               }
             }
         />
-      </Animated.View>
+      </Animated.View> */}
       {this.state.isAdding && this.renderEditingButton(submitCallback)}
       {!this.state.isAdding && this.renderAddMoneyButton()}
     </View>

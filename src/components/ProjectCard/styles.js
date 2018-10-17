@@ -34,24 +34,25 @@ export default StyleSheet.create({
     shadowOffset: {width: SHADOW_WIDTH, height: SHADOW_HEIGHT},
     shadowRadius: SHADOW_RADIUS,
     shadowOpacity: SHADOW_OPACITY,
-    backgroundColor: COLOR_WHITE,
     borderRadius: CARD_RADIUS,
-    overflow: "hidden",
   },
   imageCardContainer: {
     height: (height-CARD_HEIGHT_GUTTER),
     width: (width-CARD_WIDTH_GUTTER),
+		borderTopLeftRadius: CARD_RADIUS,
+    borderTopRightRadius: CARD_RADIUS,
+    overflow: 'hidden',
   },
   imageCardOverlay: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'flex-start',
-  },
-  editContainer: {
-    alignItems: 'flex-end',
+    borderTopLeftRadius: CARD_RADIUS,
+    borderTopRightRadius: CARD_RADIUS,
   },
   progressContainer: {
     height: CARD_PROGRESS_HEIGHT,
+    backgroundColor: 'transparent',
   },
   progressBar: {
     height: CARD_PROGRESS_HEIGHT,
@@ -66,10 +67,12 @@ export default StyleSheet.create({
   },
   openAddMoneyButton: {
     padding: 15,
-    paddingTop: 15 - CARD_PROGRESS_HEIGHT,
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
+    backgroundColor: COLOR_WHITE,
+    borderBottomLeftRadius: CARD_RADIUS,
+    borderBottomRightRadius: CARD_RADIUS,
   },
   openAddMoneyText: {
     fontWeight: '400',
