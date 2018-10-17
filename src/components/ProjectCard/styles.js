@@ -24,6 +24,7 @@ import {
   CARD_WIDTH_GUTTER,
   CARD_PROGRESS_HEIGHT,
   CARD_PROGRESS_COLOR,
+  CARD_BUTTONS_HEIGHT,
 } from './constants';
 
 const { height, width } = Dimensions.get('window');
@@ -64,9 +65,9 @@ export default StyleSheet.create({
   },
   buttonsContainer: {
     flexDirection: 'row',
+    height: CARD_BUTTONS_HEIGHT,
   },
   openAddMoneyButton: {
-    padding: 15,
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
@@ -76,6 +77,7 @@ export default StyleSheet.create({
   },
   openAddMoneyText: {
     fontWeight: '400',
+    fontSize: 15,
   },
   cancelButton: {
     backgroundColor: COLOR_RED,

@@ -1,6 +1,7 @@
 // ./styles/app.js
 
 import { StyleSheet } from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 import {
   COLOR_BACKGROUND,
@@ -11,6 +12,11 @@ import {
   TEXT_SHADOW_WIDTH,
   TEXT_SHADOW_HEIGHT,
 } from './common';
+import {
+  CARD_HEIGHT_GUTTER,
+  CARD_BUTTONS_HEIGHT,
+  CARD_HEIGHT_GAP,
+} from '../components/ProjectCard/constants';
 
 export default StyleSheet.create({
   container: {
@@ -24,6 +30,9 @@ export default StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  paginationDotContainer: {
+    height: (CARD_HEIGHT_GUTTER/2)-(CARD_BUTTONS_HEIGHT/2)-CARD_HEIGHT_GAP,
   },
   paginationDot: {
     width: 10,
@@ -40,8 +49,9 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    padding: 15,
-    marginTop: 10,
+    paddingTop: getStatusBarHeight()-3,
+    marginRight: 15,
+    height: (CARD_HEIGHT_GUTTER/2)-(CARD_BUTTONS_HEIGHT/2)+CARD_HEIGHT_GAP,
   },
   addProjectText: {
     color: COLOR_WHITE,

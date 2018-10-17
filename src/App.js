@@ -103,6 +103,7 @@ export default class App extends Component {
           dotsLength={projects.length}
           activeDotIndex={currentProject}
           dotStyle={styles.paginationDot}
+          containerStyle={styles.paginationDotContainer}
         />
     );
   }
