@@ -29,6 +29,7 @@ import { CARD_WIDTH_GUTTER } from './components/ProjectCard/constants';
 
 import { imagesAssets } from './helpers/images';
 import { retrieveProjects, storeProjects } from './helpers/storage';
+import { getCategory } from './helpers/categories';
 
 import { selectedProject } from './assets/projects';
 
@@ -96,6 +97,7 @@ export default class App extends Component {
         projectName={item.projectName}
         amountSaved={item.amountSaved}
         goal={item.goal}
+        category={getCategory(item.categoryId)}
         imageSource={imagesAssets[item.imageSource]}
         submitCallback={amount => this._addMoneyCallback(amount)}
       />

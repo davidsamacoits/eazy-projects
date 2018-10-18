@@ -25,6 +25,7 @@ import {
   CARD_PROGRESS_HEIGHT,
   CARD_PROGRESS_COLOR,
   CARD_BUTTONS_HEIGHT,
+  CARD_CATEGORY_HEIGHT,
 } from './constants';
 
 const { height, width } = Dimensions.get('window');
@@ -37,12 +38,26 @@ export default StyleSheet.create({
     shadowOpacity: SHADOW_OPACITY,
     borderRadius: CARD_RADIUS,
   },
-  imageCardContainer: {
-    height: (height-CARD_HEIGHT_GUTTER),
-    width: (width-CARD_WIDTH_GUTTER),
-		borderTopLeftRadius: CARD_RADIUS,
+  categoryContainer: {
+    borderTopLeftRadius: CARD_RADIUS,
     borderTopRightRadius: CARD_RADIUS,
-    overflow: 'hidden',
+    backgroundColor: COLOR_WHITE,
+    height: CARD_CATEGORY_HEIGHT,
+    paddingHorizontal: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  categoryText: {
+    fontWeight: '600',
+    fontSize: 15,
+  },
+  categoryIcon: {
+    marginTop: 2,
+    marginRight: 8,
+  },
+  imageCardContainer: {
+    height: (height-CARD_HEIGHT_GUTTER-CARD_CATEGORY_HEIGHT),
+    width: (width-CARD_WIDTH_GUTTER),
   },
   imageCardOverlay: {
     flex: 1,
@@ -124,7 +139,7 @@ export default StyleSheet.create({
   },
   amountGoalContainer: {
     flexDirection: 'row',
-    padding: 20,
+    padding: 15,
     paddingTop: 0,
   },
   iconGoal: {

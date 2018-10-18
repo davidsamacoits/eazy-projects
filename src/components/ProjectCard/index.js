@@ -153,6 +153,14 @@ export default class ProjectCard extends Component {
 
     return ( 
     <View style={styles.projectCardContainer}>
+      <View style={styles.categoryContainer}>
+        <Icon
+          name='ios-tennisball'
+          size={18}
+          style={styles.categoryIcon}
+        />
+        <Text style={styles.categoryText}>Category</Text>
+      </View>
       <ImageBackground
         source={imageSource}
         style={styles.imageCardContainer}
