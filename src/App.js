@@ -31,8 +31,6 @@ import { imagesAssets } from './helpers/images';
 import { retrieveProjects, storeProjects } from './helpers/storage';
 import { getCategory } from './helpers/categories';
 
-import { selectedProject } from './assets/projects';
-
 const { width } = Dimensions.get('window');
 
 export default class App extends Component {
@@ -92,13 +90,14 @@ export default class App extends Component {
     );
   }
   _renderItem({item, index}) {
+    const itemCategory = getCategory(item.categoryId);
     return (
       <ProjectCard
         projectName={item.projectName}
         amountSaved={item.amountSaved}
         goal={item.goal}
-        category={getCategory(item.categoryId)}
-        imageSource={imagesAssets[item.imageSource]}
+        category={itemCategory}
+        imageSource={imagesAssets[itemCategory.image]}
         submitCallback={amount => this._addMoneyCallback(amount)}
       />
     );
@@ -116,12 +115,13 @@ export default class App extends Component {
   }
 
   render() {
-    const currentProject = this.state.projects[this.state.currentProject];
-    const isLoading = this.state.isLoading;
-    if (currentProject && !isLoading) {
+    const { projects, currentProject, isLoading } = this.state;
+    const project = projects[currentProject];
+    if (project && !isLoading) {
+      const category = getCategory(project.categoryId);       
       return (
         <ImageBackground
-          source={imagesAssets[currentProject.imageSource]}
+          source={imagesAssets[category.image]}
           blurRadius={BLUR_RADIUS_OVERLAY}
           style={styles.container}
           resizeMode="cover"

@@ -149,81 +149,82 @@ export default class ProjectCard extends Component {
       amountSaved,
       submitCallback,
       goal,
+      category,
     } = this.props;
 
     return ( 
-    <View style={styles.projectCardContainer}>
-      <View style={styles.categoryContainer}>
-        <Icon
-          name='ios-tennisball'
-          size={18}
-          style={styles.categoryIcon}
-        />
-        <Text style={styles.categoryText}>Category</Text>
-      </View>
-      <ImageBackground
-        source={imageSource}
-        style={styles.imageCardContainer}
-        resizeMode="cover"
-      >
-        <ImageBackground
-          source={require('../../assets/images/gradient.png')}
-          style={styles.imageCardOverlay}
-          resizeMode="stretch"
-        >
-          <Text
-            numberOfLines={1}
-            ellipsizeMode="tail"
-            style={styles.projectName}
-          >
-            {projectName}
-          </Text>
-          <TextInputMask
-            type={'money'}
-            style={styles.amountSaved}
-            value={amountSaved}
-            ref={ref => (this.amountSaved = ref)}
-            options={CARD_AMOUNT_OPTIONS}
-            editable={this.state.isEditing}
+      <View style={styles.projectCardContainer}>
+        <View style={styles.categoryContainer}>
+          <Icon
+            name={category.icon}
+            size={18}
+            style={styles.categoryIcon}
           />
-          <View style={styles.amountGoalContainer}>
-            <Icon
-              name='ios-return-right'
-              size={25}
-              style={styles.iconGoal}
-            />
+          <Text style={styles.categoryText}>{category.label}</Text>
+        </View>
+        <ImageBackground
+          source={imageSource}
+          style={styles.imageCardContainer}
+          resizeMode="cover"
+        >
+          <ImageBackground
+            source={require('../../assets/images/gradient.png')}
+            style={styles.imageCardOverlay}
+            resizeMode="stretch"
+          >
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={styles.projectName}
+            >
+              {projectName}
+            </Text>
             <TextInputMask
               type={'money'}
-              style={styles.amountGoal}
-              value={goal}
-              ref={ref => (this.amountGoal = ref)}
+              style={styles.amountSaved}
+              value={amountSaved}
+              ref={ref => (this.amountSaved = ref)}
               options={CARD_AMOUNT_OPTIONS}
               editable={this.state.isEditing}
             />
-          </View>
-          <View style={styles.progressContainer}>
-            <Animated.View style={[styles.progressBar, { width: this.state.animatedProgress }]}></Animated.View>
-          </View>
+            <View style={styles.amountGoalContainer}>
+              <Icon
+                name='ios-return-right'
+                size={25}
+                style={styles.iconGoal}
+              />
+              <TextInputMask
+                type={'money'}
+                style={styles.amountGoal}
+                value={goal}
+                ref={ref => (this.amountGoal = ref)}
+                options={CARD_AMOUNT_OPTIONS}
+                editable={this.state.isEditing}
+              />
+            </View>
+            <View style={styles.progressContainer}>
+              <Animated.View style={[styles.progressBar, { width: this.state.animatedProgress, backgroundColor: category.progressBarColor }]}></Animated.View>
+            </View>
+          </ImageBackground>
         </ImageBackground>
-      </ImageBackground>
-      {/* <Animated.View style={[styles.amountInputContainer, { height: this.state.animatedHeight, opacity: this.state.animatedOpacity }]}>
-        <TextInputMask
-            type={'money'}
-            style={styles.amountInput}
-            value={this.state.amountToAdd}
-            ref={ref => (this.amountInput = ref)}
-            options={CARD_AMOUNT_OPTIONS}
-            onChangeText={() => {
-                this.setState({
-                  amountToAdd: this.amountInput.getRawValue(),
-                })
+        {/* <Animated.View style={[styles.amountInputContainer, { height: this.state.animatedHeight, opacity: this.state.animatedOpacity }]}>
+          <TextInputMask
+              type={'money'}
+              style={styles.amountInput}
+              value={this.state.amountToAdd}
+              ref={ref => (this.amountInput = ref)}
+              options={CARD_AMOUNT_OPTIONS}
+              onChangeText={() => {
+                  this.setState({
+                    amountToAdd: this.amountInput.getRawValue(),
+                  })
+                }
               }
-            }
-        />
-      </Animated.View> */}
-      {this.state.isAdding && this.renderEditingButton(submitCallback)}
-      {!this.state.isAdding && this.renderAddMoneyButton()}
-    </View>
+          />
+        </Animated.View> */}
+        {this.state.isAdding && this.renderEditingButton(submitCallback)}
+        {!this.state.isAdding && this.renderAddMoneyButton()}
+      </View>
     );
   }
 }
