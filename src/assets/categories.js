@@ -36,7 +36,7 @@ export default categories = {
     progressBarColor: 'rgb(45, 176, 118)',
   },
   6: {
-    label: 'Saving',
+    label: 'Savings',
     icon: 'logo-usd',
     image: '610e6113834749f282600314d8e22339',
     progressBarColor: 'rgb(198, 177, 145)',
@@ -45,7 +45,7 @@ export default categories = {
     label: 'Gift',
     icon: 'ios-gift',
     image: '63e0d2f3a85a49dca41dbdc90418cce1',
-    progressBarColor: 'rgb(166, 93, 80)',
+    progressBarColor: 'rgb(191, 53, 53)',
   },
   8: {
     label: 'School',

@@ -1,6 +1,6 @@
 // ./styles/app.js
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 import {
@@ -18,6 +18,8 @@ import {
   CARD_HEIGHT_GAP,
 } from '../components/ProjectCard/constants';
 
+const { height, width } = Dimensions.get('window');
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -30,6 +32,11 @@ export default StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  backgroundImages: {
+    position: 'absolute',
+    height: height,
+    width: width,
   },
   paginationDotContainer: {
     height: (CARD_HEIGHT_GUTTER/2)-(CARD_BUTTONS_HEIGHT/2)-CARD_HEIGHT_GAP,

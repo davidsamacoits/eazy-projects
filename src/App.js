@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { 
   Text,
   View,
-  ImageBackground,
+  Image,
   StatusBar,
   AsyncStorage,
   KeyboardAvoidingView,
@@ -120,31 +120,32 @@ export default class App extends Component {
     if (project && !isLoading) {
       const category = getCategory(project.categoryId);       
       return (
-        <ImageBackground
-          source={imagesAssets[category.image]}
-          blurRadius={BLUR_RADIUS_OVERLAY}
-          style={styles.container}
-          resizeMode="cover"
-        >
-            <StatusBar
-              barStyle="light-content"
+        <View style={styles.container}>
+          <Image
+            source={imagesAssets[category.image]}
+            blurRadius={BLUR_RADIUS_OVERLAY}
+            style={styles.backgroundImages}
+            resizeMode="cover"
+          />
+          <StatusBar
+            barStyle="light-content"
+          />
+          <KeyboardAvoidingView style={styles.containerOverlay} behavior="position">
+            {this._renderAddProjectButton()}
+            <Carousel
+              ref={(c) => { this._carousel = c }}
+              data={this.state.projects}
+              renderItem={this._renderItem.bind(this)}
+              sliderWidth={width}
+              itemWidth={width - CARD_WIDTH_GUTTER}
+              containerCustomStyle={{ flexGrow: 0, overflow:'visible'}}
+              onBeforeSnapToItem={this._onBeforeSnapToItem.bind(this)}
+              inactiveSlideOpacity={CAROUSSEL_INACTIVE_SLIDE_OPACITY}
+              inactiveSlideScale={CAROUSSEL_INACTIVE_SLIDE_SCALE}
             />
-            <KeyboardAvoidingView style={styles.containerOverlay} behavior="position">
-              {this._renderAddProjectButton()}
-              <Carousel
-                ref={(c) => { this._carousel = c }}
-                data={this.state.projects}
-                renderItem={this._renderItem.bind(this)}
-                sliderWidth={width}
-                itemWidth={width - CARD_WIDTH_GUTTER}
-                containerCustomStyle={{ flexGrow: 0, overflow:'visible'}}
-                onBeforeSnapToItem={this._onBeforeSnapToItem.bind(this)}
-                inactiveSlideOpacity={CAROUSSEL_INACTIVE_SLIDE_OPACITY}
-                inactiveSlideScale={CAROUSSEL_INACTIVE_SLIDE_SCALE}
-              />
-              {this._renderPagination()}
-            </KeyboardAvoidingView>
-        </ImageBackground>
+            {this._renderPagination()}
+          </KeyboardAvoidingView>
+        </View>
       );
     } else { return null; }
   }
