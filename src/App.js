@@ -15,10 +15,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
 import ProjectCard from './components/ProjectCard';
+import CarouselBackground from './components/CarouselBackground';
 
 import styles from './styles/app';
 import {
-  BLUR_RADIUS_OVERLAY,
   ACTIVE_OPACITY,
   CAROUSSEL_INACTIVE_SLIDE_OPACITY,
   CAROUSSEL_INACTIVE_SLIDE_SCALE
@@ -121,12 +121,7 @@ export default class App extends Component {
       const category = getCategory(project.categoryId);       
       return (
         <View style={styles.container}>
-          <Image
-            source={imagesAssets[category.image]}
-            blurRadius={BLUR_RADIUS_OVERLAY}
-            style={styles.backgroundImages}
-            resizeMode="cover"
-          />
+          <CarouselBackground currentBackground={category.image} />
           <StatusBar
             barStyle="light-content"
           />
