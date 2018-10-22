@@ -1,4 +1,4 @@
-// ./App.js
+// ./pages/Home.js
 
 import React, { Component } from 'react';
 import { 
@@ -14,10 +14,10 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
-import ProjectCard from './components/ProjectCard';
-import CarouselBackground from './components/CarouselBackground';
+import ProjectCard from '../components/ProjectCard';
+import CarouselBackground from '../components/CarouselBackground';
 
-import styles from './styles/app';
+import styles from '../styles/app';
 import {
   ACTIVE_OPACITY,
   CAROUSSEL_INACTIVE_SLIDE_OPACITY,
@@ -75,7 +75,7 @@ export default class Home extends Component {
     return(
       <View>
         <TouchableOpacity
-          onPress={() => this._addMoneyCallback(1000)}
+          onPress={() => this.props.navigation.navigate('Project')}
           style={styles.addProjectButton}
           activeOpacity={ACTIVE_OPACITY}
         >

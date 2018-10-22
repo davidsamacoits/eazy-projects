@@ -9,7 +9,7 @@ export const projects = [
     projectName: "New amazing car",
     amountSaved: "7500",
     goal: "12500",
-    categoryId: 1,
+    categoryId: 0,
   },
   {    
     projectName: "Partir un jour!",

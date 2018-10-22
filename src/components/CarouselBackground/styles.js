@@ -8,9 +8,14 @@ export default StyleSheet.create({
     height: height,
     width: width,
   },
+  fadeContainer: {
+    position: 'absolute',
+    height: height,
+    width: width,
+  },
   backgroundImages: {
     position: 'absolute',
     height: height,
     width: width,
-  }
+  },
 });

@@ -1,0 +1,57 @@
+// ./components/Fade/index.js
+
+import React, { Component } from 'react';
+import { Animated } from 'react-native';
+
+import {
+  FADE_DURATION,
+  FADE_SCALE_MAX,
+} from './constants';
+
+export default class Fade extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: props.visible,
+    };
+  };
+
+  componentWillMount() {
+    this._visibility = new Animated.Value(this.props.visible ? 1 : 0);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.visible) {
+      this.setState({ visible: true });
+    }
+    Animated.timing(this._visibility, {
+      toValue: nextProps.visible ? 1 : 0,
+      duration: FADE_DURATION,
+    }).start(() => {
+      this.setState({ visible: nextProps.visible });
+    });
+  }
+
+  render() {
+    const { visible, style, children, ...otherProps } = this.props;
+    const containerStyle = {
+      opacity: this._visibility.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+      }),
+      transform: [
+        {
+          scale: this._visibility.interpolate({
+            inputRange: [0, 1],
+            outputRange: [FADE_SCALE_MAX, 1],
+          }),
+        },
+      ],
+    };
+    return (
+      <Animated.View style={this.state.visible ? [containerStyle, style] : containerStyle} {...otherProps}>
+        {children}
+      </Animated.View>
+    );
+  }
+}
