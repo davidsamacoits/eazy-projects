@@ -1,14 +1,14 @@
-// ./pages/Project.js
+// ./pages/ProjectModal.js
 
 import React, { Component } from 'react';
 import { 
   Text,
 } from 'react-native';
 
-export default class Home extends Component {
+export default class ProjectModal extends Component {
   render() {
     return(
-      <Text>Project Page</Text>
+      <Text>Project Modal</Text>
     )
   }
 }
