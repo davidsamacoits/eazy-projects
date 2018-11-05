@@ -52,13 +52,17 @@ export default StyleSheet.create({
     shadowOffset: {width: TEXT_SHADOW_WIDTH, height: TEXT_SHADOW_HEIGHT},
     overflow: 'visible',
   },
-  addProjectButton: {
+  addProjectButtonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
     paddingTop: getStatusBarHeight()-3,
     marginRight: 15,
     height: (CARD_HEIGHT_GUTTER/2)-(CARD_BUTTONS_HEIGHT/2)+CARD_HEIGHT_GAP,
+  },
+  addProjectButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   addProjectText: {
     color: COLOR_WHITE,

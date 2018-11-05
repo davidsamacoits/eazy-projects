@@ -73,9 +73,9 @@ export default class Home extends Component {
   // Renders
   _renderAddProjectButton() {
     return(
-      <View>
+      <View style={styles.addProjectButtonContainer}>
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('Project')}
+          onPress={() => this.props.navigation.navigate('ProjectModal')}
           style={styles.addProjectButton}
           activeOpacity={ACTIVE_OPACITY}
         >
