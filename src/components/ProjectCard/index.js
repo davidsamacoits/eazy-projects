@@ -1,6 +1,7 @@
 // ./components/ProjectCard/index.js
 
 import React, { Component } from 'react';
+import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TextInputMask } from 'react-native-masked-text'
 
@@ -17,7 +18,11 @@ import {
 } from 'react-native';
 import styles from './styles';
 
-import { COLOR_PRIMARY, TEXT_SHADOW_WIDTH } from '../../styles/common';
+import {
+  COLOR_PRIMARY,
+  TEXT_SHADOW_WIDTH,
+  ACTIVE_OPACITY,
+} from '../../styles/common';
 
 import { 
   CARD_INPUT_HEIGHT,
@@ -28,17 +33,12 @@ import {
   CARD_AMOUNT_OPTIONS,
 } from './constants';
 
-export default class ProjectCard extends Component {
+class ProjectCard extends Component {
   constructor(props) {
     super(props);
     // Calculate initial progress
     const progressWidth = this.calculateProgressWidth(this.props.goal, this.props.amountSaved);
     this.state = {
-      isAdding: false,
-      isEditing: false,
-      amountToAdd: '0',
-      animatedHeight: new Animated.Value(0),
-      animatedOpacity: new Animated.Value(0),
       animatedProgress: new Animated.Value(progressWidth),
     };
   }
@@ -58,88 +58,6 @@ export default class ProjectCard extends Component {
       this.state.animatedProgress,
       { toValue: progressWidth, duration: CARD_INPUT_DURATION }
     ).start();
-  }
-
-  animateInput() {
-    const values = {
-      height: {
-        initial: this.state.isAdding ? CARD_INPUT_HEIGHT : 0,
-        toValue: this.state.isAdding ? 0 : CARD_INPUT_HEIGHT,
-        delay: this.state.isAdding ? CARD_INPUT_DELAY/2 : 0,
-      },
-      opacity: {
-        initial: this.state.isAdding ? CARD_INPUT_OPACITY : 0,
-        toValue: this.state.isAdding ? 0 : CARD_INPUT_OPACITY,
-        delay: this.state.isAdding ? 0 : CARD_INPUT_DELAY,
-      },
-    };
-    this.state.animatedHeight.setValue(values.height.initial);
-    this.state.animatedOpacity.setValue(values.opacity.initial);
-    // Animate input height and opacity
-    Animated.timing(
-        this.state.animatedHeight,
-        { toValue: values.height.toValue, duration: CARD_INPUT_DURATION, delay: values.height.delay }
-    ).start();
-    Animated.timing(
-        this.state.animatedOpacity,
-        { toValue: values.opacity.toValue, duration: CARD_INPUT_DURATION, delay: values.opacity.delay }
-    ).start();
-  }
-
-  showEditing() {
-    this.setState(previousState => {
-      return { isAdding: true };
-    });
-    this.animateInput();
-  }
-
-  hideEditing() {
-    this.setState(previousState => {
-      return { isAdding: false, amountToAdd: '0' };
-    });
-    this.animateInput();
-    Keyboard.dismiss();
-  }
-
-  renderAddMoneyButton() {
-    return(
-      <View style={styles.buttonsContainer}>
-        <TouchableOpacity
-          onPress={() => this.showEditing()}
-          color={COLOR_PRIMARY}
-          style={styles.openAddMoneyButton}
-        >
-          <Text style={styles.openAddMoneyText}>Add money to this project</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
-  renderEditingButton(submitCallback) {
-    return(
-      <View>
-        <View style={styles.buttonsContainer}>
-          <TouchableOpacity
-            onPress={() => this.hideEditing()}
-            color={COLOR_PRIMARY}
-            style={styles.cancelButton}
-          >
-            <Text style={styles.cancelText}>Cancel</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              submitCallback(this.state.amountToAdd);
-              this.animateProgressBar(this.state.amountToAdd);
-              this.hideEditing();
-            }}
-            color={COLOR_PRIMARY}
-            style={styles.addMoneyButton}
-          >
-            <Text style={styles.addText}>Add</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
   }
 
   render() {
@@ -207,24 +125,19 @@ export default class ProjectCard extends Component {
             </View>
           </ImageBackground>
         </ImageBackground>
-        {/* <Animated.View style={[styles.amountInputContainer, { height: this.state.animatedHeight, opacity: this.state.animatedOpacity }]}>
-          <TextInputMask
-              type={'money'}
-              style={styles.amountInput}
-              value={this.state.amountToAdd}
-              ref={ref => (this.amountInput = ref)}
-              options={CARD_AMOUNT_OPTIONS}
-              onChangeText={() => {
-                  this.setState({
-                    amountToAdd: this.amountInput.getRawValue(),
-                  })
-                }
-              }
-          />
-        </Animated.View> */}
-        {this.state.isAdding && this.renderEditingButton(submitCallback)}
-        {!this.state.isAdding && this.renderAddMoneyButton()}
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('AddMoneyModal')}
+            color={COLOR_PRIMARY}
+            style={styles.openAddMoneyButton}
+            activeOpacity={ACTIVE_OPACITY}
+          >
+            <Text style={styles.openAddMoneyText}>Add money to this project</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
+
+export default withNavigation(ProjectCard);

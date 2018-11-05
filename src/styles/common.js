@@ -26,7 +26,7 @@ export const TEXT_SHADOW_WIDTH = 0;
 export const TEXT_SHADOW_RADIUS = 5;
 
 // OPACITY
-export const ACTIVE_OPACITY = 0.65;
+export const ACTIVE_OPACITY = 0.75;
 
 // CAROUSSEL
 export const CAROUSSEL_INACTIVE_SLIDE_OPACITY = 0.85;
