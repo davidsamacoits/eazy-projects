@@ -1,4 +1,4 @@
-// ./pages/ProjectModal.js
+// ./modals/ProjectModal/index.js
 
 import React, { Component } from 'react';
 import { 

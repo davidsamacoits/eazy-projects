@@ -1,4 +1,4 @@
-// ./pages/AddMoneyModal.js
+// ./modals/AddMoneyModal/index.js
 
 import React, { Component } from 'react';
 import { 

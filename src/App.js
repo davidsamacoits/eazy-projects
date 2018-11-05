@@ -5,8 +5,8 @@ import { StackNavigator } from 'react-navigation';
 import { fadeIn } from 'react-navigation-transitions';
 
 import Home from './pages/Home';
-import ProjectModal from './pages/modals/ProjectModal';
-import AddMoneyModal from './pages/modals/AddMoneyModal';
+import ProjectModal from './modals/ProjectModal';
+import AddMoneyModal from './modals/AddMoneyModal';
 
 const MainNavigator = StackNavigator(
   {
