@@ -31,3 +31,7 @@ export const ACTIVE_OPACITY = 0.75;
 // CAROUSSEL
 export const CAROUSSEL_INACTIVE_SLIDE_OPACITY = 0.85;
 export const CAROUSSEL_INACTIVE_SLIDE_SCALE = 0.9;
+
+// MODAL
+export const MODAL_BACKGROUND_COLOR = 'rgba(0,0,0,0.9)';
+export const MODAL_GUTTER = 45;

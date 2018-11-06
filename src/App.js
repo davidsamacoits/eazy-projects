@@ -8,6 +8,8 @@ import Home from './pages/Home';
 import ProjectModal from './modals/ProjectModal';
 import AddMoneyModal from './modals/AddMoneyModal';
 
+import { MODAL_BACKGROUND_COLOR } from './styles/common';
+
 const MainNavigator = StackNavigator(
   {
     Home: { screen: Home },
@@ -40,7 +42,7 @@ const AppNavigator = StackNavigator(
       headerVisible: false,
     },
     cardStyle: {
-      backgroundColor: 'rgba(0,0,0,0.75)',
+      backgroundColor: MODAL_BACKGROUND_COLOR,
     },
     transitionConfig: () => fadeIn(),
   }
