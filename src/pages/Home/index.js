@@ -1,17 +1,19 @@
 import { connect } from 'react-redux';
 
-import AddMoneyModal from './addMoneyModal';
+import Home from './home';
 
 import {
-  addMoneyToProject,
+  changeCurrentProject,
 } from '../../services/projectsService/actions';
 
 function mapStateToProps(state) {
   return {
+    isLoading: state.applicationReducer.isLoading,
+    projects: state.projectsReducer.projects,
     currentProject: state.projectsReducer.currentProject,
   };
 }
 
 export default connect(mapStateToProps, {
-  addMoneyToProject: (projectId, amount) => addMoneyToProject(projectId, amount),
-})(AddMoneyModal);
+  changeCurrentProject: currentProject => changeCurrentProject(currentProject),
+})(Home);

@@ -13,14 +13,13 @@ export const storeProjects = async (projectsToSave) => {
   }
 }
 
-export const retrieveProjects = async (force = false) => {
+export const retrieveProjects = async (force = true) => {
   try {
     if (force) await AsyncStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(projects));
     const value = await AsyncStorage.getItem(STORAGE_KEYS.PROJECTS);
     if (value !== null) {
       const projectsFromStorage = JSON.parse(value);
       return projectsFromStorage;
-      console.log(projectsFromStorage);
     }
     // No value found, we get the one from assets
     await AsyncStorage.setItem(STORAGE_KEYS.PROJECTS, JSON.stringify(projects));

@@ -2,7 +2,7 @@ export const projects = [
   {
     projectName: "Europe MMXIX",
     amountSaved: "1000",
-    goal: "5000",
+    goal: "50000",
     categoryId: 0,
   },
   {    

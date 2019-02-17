@@ -16,6 +16,7 @@ import {
   CARD_HEIGHT_GUTTER,
   CARD_BUTTONS_HEIGHT,
   CARD_HEIGHT_GAP,
+  CARD_SAFE_BOTTOM_MARGIN,
 } from '../components/ProjectCard/constants';
 
 const { height, width } = Dimensions.get('window');
@@ -28,10 +29,7 @@ export default StyleSheet.create({
   },
   containerOverlay: {
     backgroundColor: COLOR_OVERLAY,
-    flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   backgroundImages: {
     position: 'absolute',
@@ -39,7 +37,8 @@ export default StyleSheet.create({
     width: width,
   },
   paginationDotContainer: {
-    height: (CARD_HEIGHT_GUTTER/2)-(CARD_BUTTONS_HEIGHT/2)-CARD_HEIGHT_GAP,
+    height: (CARD_HEIGHT_GUTTER/2)-(CARD_BUTTONS_HEIGHT/2)-CARD_HEIGHT_GAP-CARD_SAFE_BOTTOM_MARGIN,
+    marginBottom: CARD_SAFE_BOTTOM_MARGIN,
   },
   paginationDot: {
     width: 10,
@@ -56,8 +55,8 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    paddingTop: getStatusBarHeight()-3,
-    marginRight: 15,
+    paddingTop: getStatusBarHeight()-5,
+    marginRight: 18,
     height: (CARD_HEIGHT_GUTTER/2)-(CARD_BUTTONS_HEIGHT/2)+CARD_HEIGHT_GAP,
   },
   addProjectButton: {

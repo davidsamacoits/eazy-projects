@@ -1,0 +1,2 @@
+export const APP_STOP_LOADING = 'APP_STOP_LOADING';
+export const APP_START_LOADING = 'APP_START_LOADING';

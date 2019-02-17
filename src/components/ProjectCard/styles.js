@@ -94,28 +94,6 @@ export default StyleSheet.create({
     fontWeight: '400',
     fontSize: 15,
   },
-  cancelButton: {
-    backgroundColor: COLOR_RED,
-    padding: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-  },
-  cancelText: {
-    color: COLOR_WHITE,
-    fontWeight: '500',
-  },
-  addMoneyButton: {
-    backgroundColor: COLOR_GREEN,
-    padding: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-  },
-  addText: {
-    color: COLOR_WHITE,
-    fontWeight: '500',
-  },
   projectName: {
     color: COLOR_WHITE,
     fontWeight: '700',
@@ -158,15 +136,4 @@ export default StyleSheet.create({
     textShadowRadius: TEXT_SHADOW_RADIUS,
     textShadowOffset: {width: TEXT_SHADOW_WIDTH, height: TEXT_SHADOW_HEIGHT},
   },
-  amountInputContainer: {
-    height: 0,
-    justifyContent: 'center',
-    opacity: 0,
-  },
-  amountInput: {
-    padding: 15,
-    paddingTop: 15 - CARD_PROGRESS_HEIGHT,
-    fontSize: 25,
-    fontWeight: '300',
-  }
 });

@@ -1,14 +1,9 @@
-// ./modals/ProjectModal/index.js
+import { connect } from 'react-redux';
 
-import React, { Component } from 'react';
-import { 
-  Text,
-} from 'react-native';
+import ProjectModal from './projectModal';
 
-export default class ProjectModal extends Component {
-  render() {
-    return(
-      <Text>Project Modal</Text>
-    )
-  }
+function mapStateToProps(state) {
+  return {};
 }
+
+export default connect(null, {})(ProjectModal);

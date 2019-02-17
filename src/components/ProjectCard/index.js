@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TextInputMask } from 'react-native-masked-text'
+import isEqual from 'lodash/isEqual';
 
 import {
   Text,
@@ -31,6 +32,8 @@ import {
   CARD_INPUT_DELAY,
   CARD_WIDTH_GUTTER,
   CARD_AMOUNT_OPTIONS,
+  CARD_PROGRESS_DELAY,
+  CARD_PROGRESS_DURATION,
 } from './constants';
 
 class ProjectCard extends Component {
@@ -43,6 +46,22 @@ class ProjectCard extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    // console.log('>>>>>>>> nextProps.amountSaved', nextProps.amountSaved);
+    // this.animateProgressBar(nextProps.amountSaved);
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (
+      !isEqual(this.props.amountSaved, nextProps.amountSaved) ||
+      !isEqual(this.props.category, nextProps.category) ||
+      !isEqual(this.props.goal, nextProps.goal)
+    ) {
+      this.animateProgressBar(nextProps.goal, nextProps.amountSaved);
+      return true;
+    }
+    return false;
+  }
+
   calculateProgressWidth(goal, amountSaved) {
     const { width } = Dimensions.get('window');
     const fullWidth = width - CARD_WIDTH_GUTTER;
@@ -52,11 +71,11 @@ class ProjectCard extends Component {
     return pourcentage * fullWidth;
   }
 
-  animateProgressBar(amountToAdd) {
-    const progressWidth = this.calculateProgressWidth(this.props.goal, (+this.props.amountSaved + +amountToAdd));
+  animateProgressBar(goal, amount) {
+    const progressWidth = this.calculateProgressWidth(goal, amount);
     Animated.timing(
       this.state.animatedProgress,
-      { toValue: progressWidth, duration: CARD_INPUT_DURATION }
+      { toValue: progressWidth, duration: CARD_PROGRESS_DURATION, delay: CARD_PROGRESS_DELAY }
     ).start();
   }
 
@@ -65,9 +84,9 @@ class ProjectCard extends Component {
       imageSource,
       projectName,
       amountSaved,
-      submitCallback,
       goal,
       category,
+      forceUpdate,
     } = this.props;
 
     return ( 
@@ -103,7 +122,7 @@ class ProjectCard extends Component {
               value={amountSaved}
               ref={ref => (this.amountSaved = ref)}
               options={CARD_AMOUNT_OPTIONS}
-              editable={this.state.isEditing}
+              editable={false}
             />
             <View style={styles.amountGoalContainer}>
               <Icon
@@ -117,17 +136,17 @@ class ProjectCard extends Component {
                 value={goal}
                 ref={ref => (this.amountGoal = ref)}
                 options={CARD_AMOUNT_OPTIONS}
-                editable={this.state.isEditing}
+                editable={false}
               />
             </View>
             <View style={styles.progressContainer}>
-              <Animated.View style={[styles.progressBar, { width: this.state.animatedProgress, backgroundColor: category.progressBarColor }]}></Animated.View>
+              <Animated.View style={[styles.progressBar, { width: this.state.animatedProgress, backgroundColor: category.mainColor }]}></Animated.View>
             </View>
           </ImageBackground>
         </ImageBackground>
         <View style={styles.buttonsContainer}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('AddMoneyModal')}
+            onPress={() => this.props.navigation.navigate('AddMoneyModal', { forceUpdate })}
             color={COLOR_PRIMARY}
             style={styles.openAddMoneyButton}
             activeOpacity={ACTIVE_OPACITY}
